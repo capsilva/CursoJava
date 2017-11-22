@@ -46,7 +46,7 @@
 			<form action="${pageContext.request.contextPath}/PesquisaClienteServlet" method="post">	
 				<div class="col-sm-6">
 					<div class="input-group h2">
-						<input name="txtPesquisa" class="form-control" id="search" type="text" placeholder="Pesquisar Clientes" value="${filtro}" /> 
+						<input name="txtPesquisa" class="form-control" id="txtPesquisa" type="text" placeholder="Pesquisar Clientes" value="${filtro}" /> 
 						<span class="input-group-btn">
 							<button class="btn btn-primary" type="submit" style="height: 34px;">
 								<span class="glyphicon glyphicon-search"></span>

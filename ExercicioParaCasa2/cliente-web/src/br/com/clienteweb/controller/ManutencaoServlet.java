@@ -17,7 +17,8 @@ public class ManutencaoServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	
-	@Override
+	int idCookie = 0;
+			
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)	throws ServletException, IOException 
 	{
 		salvar(request, response);
@@ -40,28 +41,36 @@ public class ManutencaoServlet extends HttpServlet {
 		String sobreNome = getParameter(request, "txtSobrenome");
 		String idade = getParameter(request, "txtIdade");
 		String telefone = getParameter(request, "txtTelefone");
+		        
+		Cookie cookieId = new Cookie("cookieId" + idCookie, id);
+		Cookie cookieNome = new Cookie("cookieNome" + idCookie, nome);
+		Cookie cookieSobrenome = new Cookie("cookieSobrenome" + idCookie, sobreNome);
+		Cookie cookieIdade = new Cookie("cookieIdade" + idCookie, idade);
+		Cookie cookieTelefone = new Cookie("cookieTelefone" + idCookie, telefone);
+			
+		response.addCookie(cookieId);
+		response.addCookie(cookieNome);
+		response.addCookie(cookieSobrenome);
+		response.addCookie(cookieIdade);
+		response.addCookie(cookieTelefone);
 		
-		response.addCookie(new Cookie("cookieId", id));
-		response.addCookie(new Cookie("cookieNome", nome));
-		response.addCookie(new Cookie("cookieSobrenome", sobreNome));
-		response.addCookie(new Cookie("cookieIdade", idade));
-		response.addCookie(new Cookie("cookieTelefone", telefone));		
-		
+		idCookie += 1;
+				
 		if (id != null)		
 		{
-			RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
 			dispatcher.forward(request, response);
 		}
 		else
 		{
-			RequestDispatcher dispatcher = request.getRequestDispatcher("manutencao.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/manutencao.jsp");
 			dispatcher.forward(request, response);
 		}
 				
 	}
 
 	private String getParameter(HttpServletRequest request, String string) {		
-		return null;
+		return request.getParameter(string);
 	}
 	
 	@SuppressWarnings("unchecked")
